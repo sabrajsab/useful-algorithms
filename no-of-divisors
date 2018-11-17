@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    long int b,i,cont=2;
+    cin>>b;
+    long int m=ceil(sqrt(b));
+    for(i=2;i<=m;++i)
+        if(b%i==0)
+            {
+
+                if(i*i==b)
+                {
+                    cont++;
+                    cout<<cont;
+                    return 0;
+                }
+                cont+=2;
+            }
+    cout<<cont;
+    return 0;
+}
