@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#include<vector>
+using namespace std;
+
+vector<int> v;
+void digitify(int a)
+{
+    while(a)
+    {
+        v.push_back(a%10);
+        a/=10;
+    }
+}
+void extraLongFactorials(int n) {
+    int j,i,carry;
+    digitify(n);
+    for(i=1;i<n;i++)
+    {
+        carry=0;
+        for(j=0;j<v.size();++j)
+        {
+            carry=i*v[j]+carry;
+            v[j]=carry%10;
+            carry=carry/10;
+        }
+        digitify(carry);
+    }
+    for(i=v.size()-1;i>=0;--i)
+        cout<<v[i];
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+ 
+
+    extraLongFactorials(n);
+
+    return 0;
+}
