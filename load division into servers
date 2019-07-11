@@ -1,0 +1,72 @@
+//load division into servers
+//divide array into 3 consecutive parts with same aggregate value
+//extensive recursion
+
+#include<bits/stdc++.h>
+void left_fun(vector<int> &A,int &left_sum,int &rit_sum,int &left_index,int &rit_index,int &flag);
+void rit_fun(vector<int> &A,int &left_sum,int &rit_sum,int &left_index,int &rit_index,int &flag)
+{
+    if(left_index>=rit_index)
+        flag=1;
+    if(rit_sum<left_sum)
+    {
+        rit_sum+=A[--rit_index];
+        rit_fun(A,left_sum,rit_sum,left_index,rit_index,flag);
+    }
+    else if(left_sum<rit_sum)
+        left_fun(A,left_sum,rit_sum,left_index,rit_index,flag);
+    else return;
+}
+void left_fun(vector<int> &A,int &left_sum,int &rit_sum,int &left_index,int &rit_index,int &flag)
+{
+    if(left_index>=rit_index)
+        flag=1;
+    if(left_sum<rit_sum)
+    {
+        left_sum+=A[++left_index];
+        left_fun(A,left_sum,rit_sum,left_index,rit_index,flag);
+    }
+    else if(rit_sum<left_sum)
+        rit_fun(A,left_sum,rit_sum,left_index,rit_index,flag);
+    else
+        return;
+}
+bool yoyo(vector<int> &A,int &left_sum,int &rit_sum,int &left_index,int &rit_index,int &flag)
+{
+	left_fun(A,left_sum,rit_sum,left_index,rit_index,flag);
+	if(flag)
+        return false;
+    int sum=0;
+    for(int i=left_index+2;i<rit_index-1;++i)
+        sum+=A[i];
+    if(sum<left_sum)
+        return false;
+    else if(sum==left_sum)
+        return true;
+    else
+    {
+        left_index++;
+        left_sum+=A[left_index];
+        return yoyo(A,left_sum,rit_sum,left_index,rit_index,flag);
+    }
+    return true;
+}
+bool solution(vector<int> &A) {
+    int flag=0;
+    int left_index=0,rit_index=A.size()-1,left_sum=A[0],rit_sum=A[A.size()-1];
+    return yoyo(A,left_sum,rit_sum,left_index,rit_index,flag);
+}
+int main()
+{
+	int n;
+	cin>>n;
+	vector<int> a(n);
+	for(int i=0;i<n;++i)
+	{
+		cin>>a[i];
+	}
+	if(solution(a))
+        cout<<"yeess";
+    else cout<<"Noo";
+	return 0;
+}
