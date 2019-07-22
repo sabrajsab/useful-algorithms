@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+void horspool(string str,string pat)
+{
+    int n=str.size(),m=pat.size();
+    int s=0;
+    vector<int>shift(123);
+    fill(shift.begin(),shift.end(),-1);
+    for(int i=0;i<m;++i)
+        shift[(int)pat[i]]=i;
+    while(s<=n-m+1)
+    {
+        int j=m-1;
+        while(j>=0)
+        {
+            if(str[s+j]!=pat[j])
+            {
+                s+=j-shift[str[s+j]];
+                break;
+            }
+            j--;
+        }
+        if(j==-1)
+        {
+            cout<<"matched at pos : "<<s+1<<endl;
+            s+=m;
+        }
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    string str;
+    cin>>str;
+    string pat;
+    cin>>pat;
+    cout<<"string :\n";
+    cout<<str;
+    cout<<endl;
+
+    cout<<"pattern\n";
+    cout<<pat;
+    cout<<endl;
+    //cout<<"time taken : "<<(t2-t1)/CLOCKS_PER_SEC*1000<<" milli sec ";
+    horspool(str,pat);
+    return 0;
+}
