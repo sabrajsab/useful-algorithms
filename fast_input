@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int fastScan()
+{
+    int neg=1,a=0;
+    register int c=getchar();
+    if(c=='-')
+    {
+        neg=-1;
+        c=getchar();
+    }
+    do
+    {
+        a*=10;
+        a+=(c-48);
+    }while((c=getchar())!=10);
+
+    return a*neg;
+}
+int main()
+{
+    int n;
+    n=fastScan();
+    cout<<n;
+    return 0;
+
+}
