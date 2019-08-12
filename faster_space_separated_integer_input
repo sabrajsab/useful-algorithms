@@ -16,11 +16,12 @@ void scanSpaceSeparatedIntegers(vector<int> & v)
         do
         {
             a*=10;
-            a+=(c-48);
+            a+=(c-48);   // AASCII code for '0'
             c=getchar();
-            if(c==32)
+            if(c==32)    // AASCII code for ' '
                 break;
-            if(c==10)
+            if(c==10)      //AASCII code for '\n'
+            
             {
                 v.emplace_back(a*=neg);
                 return;
